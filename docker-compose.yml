@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: openproject-dev-db
+    restart: unless-stopped
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: openproject
+      POSTGRES_PASSWORD: openproject-dev-password
+      POSTGRES_DB: openproject_dev
+    volumes:
+      - openproject_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openproject -d openproject_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  openproject_pgdata:

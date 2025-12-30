@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.openproject.org)",
+      "Bash(docker compose:*)",
+      "Bash(sudo lsof:*)",
+      "Bash(ss -tlnp:*)",
+      "Bash(grep:*)",
+      "Bash(netstat:*)",
+      "Bash(docker rm:*)",
+      "Bash(docker exec:*)",
+      "Bash(bin/setup_dev:*)",
+      "Bash(pgrep:*)",
+      "Bash(command -v:*)",
+      "Bash(overmind:*)",
+      "Bash(command -v foreman:*)",
+      "Bash(foreman --version:*)",
+      "Bash(lsof:*)",
+      "Bash(curl:*)",
+      "Bash(cat:*)",
+      "Bash(env)",
+      "Bash(ruby -e 'puts ENV[\"\"RAILS_ENV\"\"].inspect')",
+      "Bash(ls:*)"
+    ]
+  }
+}
