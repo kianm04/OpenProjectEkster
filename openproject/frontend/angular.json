@@ -127,7 +127,10 @@
         "serve": {
           "builder": "@angular-builders/custom-esbuild:dev-server",
           "options": {
-            "servePath": "/assets/frontend"
+            "servePath": "/assets/frontend",
+            "prebundle": {
+              "exclude": ["@xeokit/xeokit-sdk", "@xeokit/xeokit-bim-viewer"]
+            }
           },
           "configurations": {
             "production": {

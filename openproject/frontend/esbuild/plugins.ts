@@ -39,4 +39,27 @@ const customConfigPlugin:Plugin = {
   }
 }
 
-export default [customConfigPlugin];
+// Plugin to handle Node.js built-in modules that are required by browser libraries like @xeokit/xeokit-sdk
+const nodeBuiltinsPlugin:Plugin = {
+  name: 'node-builtins',
+  setup(build) {
+    // Mark Node.js built-in modules as external and provide empty stubs
+    const nodeBuiltins = ['fs', 'path', 'os', 'crypto', 'stream', 'util', 'events', 'buffer', 'child_process', 'net', 'tls', 'http', 'https', 'zlib'];
+
+    build.onResolve({ filter: new RegExp(`^(${nodeBuiltins.join('|')})$`) }, args => {
+      return {
+        path: args.path,
+        namespace: 'node-empty-stub',
+      };
+    });
+
+    build.onLoad({ filter: /.*/, namespace: 'node-empty-stub' }, () => {
+      return {
+        contents: 'export default {}; export const readFileSync = () => null; export const existsSync = () => false;',
+        loader: 'js',
+      };
+    });
+  }
+}
+
+export default [customConfigPlugin, nodeBuiltinsPlugin];
